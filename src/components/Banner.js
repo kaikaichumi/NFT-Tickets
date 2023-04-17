@@ -287,6 +287,7 @@ export const Banner = () => {
                       console.info(error);
                     }
                   }}
+                  scanDelay={100}
                   style={{ width: '100%' }}
                 />
                 <p>{data}</p>
