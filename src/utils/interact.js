@@ -54,7 +54,8 @@ export const nftused = async(tokenId)=>{
     const used = await window.contract.methods
       .nftused(tokenId)
       .call({ from: window.ethereum.selectedAddress });
-    if(used === 1){
+      console.log(tokenId+"     "+used);
+    if(used == 1){
       return {
         success: true,
         status: "✅ NFT Ticket 可使用",

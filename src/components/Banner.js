@@ -9,7 +9,6 @@ import qr_logo from "../assets/img/qr_logo.png";
 import emailjs from "emailjs-com";
 import React from 'react';
 import { QrReader } from 'react-qr-reader';
-import { ImgurClient } from 'imgur';
 import { Email } from "./smtp.js";
 
 const qrCode = new QRCodeStyling({
@@ -70,7 +69,7 @@ export const Banner = () => {
   //qrcode
    
   //email
-    const handleSubmit = () => {
+    const email_send = () => {
       
     //   Email.send({
     //     SecureToken : "fcf8dd64-3f34-46cd-9a71-48e852d4c51c",
@@ -152,7 +151,7 @@ export const Banner = () => {
 
 
   //mintNFT
-  const [count, setcount] = useState("");
+  const [count, setcount] = useState(1);
   const onMint = async () => {
     setcount(1);
     console.log(count);
@@ -163,15 +162,16 @@ export const Banner = () => {
 
   //verify nft 
   const inputRef = useRef(null);
-  const [tokenId, setTokenId] = useState("");
+  var tokenId = "";
+  
   const onVerify = async () => {
     // 👇 "inputRef.current.value" is input value
-    setTokenId(inputRef.current.value);
+    tokenId = inputRef.current.value;
     if (tokenId < 0 || tokenId > 100) {
       console.log("Please input tokenId for the range 0~99.");
       alert("Please input tokenId for the range 0~99.");
     } else {
-      const status  = await verifyNFT(tokenId);
+      const { status } = await verifyNFT(tokenId);
       console.log(status);
       alert(status);
     }
@@ -179,15 +179,18 @@ export const Banner = () => {
 
   //nftused return(uint256)
   const OwnerOfcall = async()=>{
-    setTokenId(data);
+    tokenId = data;
+    
     if (tokenId < 0 || tokenId > 100) {
       console.log("Please input tokenId for the range 0~99.");
       alert("Please input tokenId for the range 0~99.");
     } else {
-      const  status  = await nftused(tokenId);
+      
+      const { status } = await nftused(tokenId);
       console.log(status);
       alert(status);
     }
+  
   }
   //totalSupply return(uint256)
   const totalSupplyOfcall = async()=>{
@@ -200,7 +203,7 @@ export const Banner = () => {
 
   //tokenURI
   const tokenURICall = async()=>{
-    setTokenId(inputRef.current.value);
+    tokenId = inputRef.current.value;
     if (tokenId < 0 || tokenId > 100) {
       console.log("Please input tokenId for the range 0~99.");
       alert("Please input tokenId for the range 0~99.");
@@ -269,8 +272,8 @@ export const Banner = () => {
               {({ isVisible }) => (
                 <div className="App">
                 <div>
-                                  
-                  <button onClick={onDownloadClick}>Download</button>
+                                
+                  
                 </div>
                 <div ref={ref} />
                 <>
@@ -297,6 +300,7 @@ export const Banner = () => {
     </section>
   );
 }
+// <button onClick={email_send}>Send email</button> //276
 // <div style={styles.inputWrapper}>
 // <input value={url} onChange={onUrlChange} style={styles.inputBox} />
 // <button onClick={onDownloadClick}>Download</button>
