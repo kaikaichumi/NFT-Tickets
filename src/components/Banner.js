@@ -209,8 +209,12 @@ export const Banner = () => {
       alert("Please input tokenId for the range 0~99.");
     } else {
       const { status } = await tokenURI(tokenId);
-      console.log(status);
-      alert(status);
+      //console.log(status);
+      //alert(status);
+      
+    fetch(status)
+      .then((response) => response.json())
+      .then((json) => alert(json.image));
     }
   }
 
@@ -260,7 +264,7 @@ export const Banner = () => {
                     Verify NFT Ticket <ArrowRightCircle size={30} />
                   </button>
                   <button onClick={tokenURICall}>
-                    View NFT tokenURI
+                    View NFT Ticket
                     <ArrowRightCircle size={30} />
                   </button>
                 </div>

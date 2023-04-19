@@ -25,7 +25,7 @@ export const tokenURI = async(tokenId)=>{
       .call({ from: window.ethereum.selectedAddress });
     return {
       success: true,
-      status: "✅ NFT圖片地址為:" + used,
+      status: used,
     };
   } catch(err){
     return {

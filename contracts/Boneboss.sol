@@ -159,7 +159,6 @@ contract nfticket is ERC721, ReentrancyGuard, Ownable {
 
   function tokenVerify(uint256 tokenId)
     external onlyOwner 
-    returns(bool)
       {
         if(msg.sender == ownerOf(tokenId)){
           if(tokencountMap[tokenId]==1){
