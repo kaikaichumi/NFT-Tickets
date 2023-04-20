@@ -41,7 +41,7 @@ contract nfticket is ERC721, ReentrancyGuard, Ownable {
     mintCountMap[minter] += count;
   }
 
-  /** MINTING **/
+  /** MINTING SETTING**/
 
   uint256 public constant MAX_SUPPLY = 100;
 

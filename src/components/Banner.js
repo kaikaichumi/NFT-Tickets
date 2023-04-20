@@ -250,12 +250,7 @@ export const Banner = () => {
                   <button onClick={onMint}>
                     Mint NFT! <ArrowRightCircle size={30} />
                   </button>
-                  <input
-                    ref={inputRef}
-                    type="text"
-                    placeholder="your tokenId"
-                    id="verifytext"
-                  />
+                  
                   <button onClick={OwnerOfcall}>
                     Check the remaining usage
                     <ArrowRightCircle size={30} />
@@ -281,6 +276,7 @@ export const Banner = () => {
                 </div>
                 <div ref={ref} />
                 <>
+                <h4>{data}</h4>
                 <QrReader
                   onResult={(result, error) => {
                     if (!!result) {
@@ -294,7 +290,7 @@ export const Banner = () => {
                   scanDelay={100}
                   style={{ width: '100%' }}
                 />
-                <p>{data}</p>
+                
               </>
                 </div>
               )}
@@ -305,6 +301,8 @@ export const Banner = () => {
     </section>
   );
 }
+
+
 // <button onClick={email_send}>Send email</button> //276
 // <div style={styles.inputWrapper}>
 // <input value={url} onChange={onUrlChange} style={styles.inputBox} />
