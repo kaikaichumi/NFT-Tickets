@@ -264,7 +264,7 @@ export const Banner = () => {
                 </div>
                 <div ref={ref} />
                 <>
-                <h4>{data}</h4>
+                <h4>TokenId: {data}</h4>
                 <QrReader
                   onResult={(result, error) => {
                     if (!!result) {
