@@ -62,7 +62,7 @@ export const nftused = async(tokenId)=>{
       };
     }else{
       return {
-        success: true,
+        success: false,
         status: "❌ NFT Ticket 已使用",
       };
     }

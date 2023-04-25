@@ -69,7 +69,7 @@ export const Banner = () => {
   //qrcode
    
   //email
-    const email_send = () => {
+  const email_send = () => {
       
     //   Email.send({
     //     SecureToken : "fcf8dd64-3f34-46cd-9a71-48e852d4c51c",
@@ -108,7 +108,19 @@ export const Banner = () => {
 
   //qrcode 掃描
   const [data, setData] = useState('No result');
-  //qrcode 掃描
+  var QRdata = 'No result';
+  //qrcode 驗證
+  const QRdata_verify = async (data) => {
+    if (QRdata != data){//判斷data是否被改變
+      QRdata = data;
+      if (await OwnerOfcall(data) == true){
+        onVerify(data);
+      };
+      
+    }
+
+  }
+  
   
 
   useEffect(() => {
@@ -164,9 +176,10 @@ export const Banner = () => {
   const inputRef = useRef(null);
   var tokenId = "";
   
-  const onVerify = async () => {
+  const onVerify = async (data) => {
     // 👇 "inputRef.current.value" is input value
-    tokenId = inputRef.current.value;
+    tokenId = data;
+    console.log(tokenId);
     if (tokenId < 0 || tokenId > 100) {
       console.log("Please input tokenId for the range 0~99.");
       alert("Please input tokenId for the range 0~99.");
@@ -178,19 +191,23 @@ export const Banner = () => {
   };
 
   //nftused return(uint256)
-  const OwnerOfcall = async()=>{
+  const OwnerOfcall = async(data)=>{
     tokenId = data;
-    
+    console.log(tokenId);
     if (tokenId < 0 || tokenId > 100) {
       console.log("Please input tokenId for the range 0~99.");
       alert("Please input tokenId for the range 0~99.");
+      return false;
     } else {
       
-      const { status } = await nftused(tokenId);
+      const { status, success} = await nftused(tokenId);
       console.log(status);
+      console.log(success);
+      console.log(success.toString());
       alert(status);
+      return success;
     }
-  
+    
   }
   //totalSupply return(uint256)
   const totalSupplyOfcall = async()=>{
@@ -237,36 +254,7 @@ export const Banner = () => {
     <section className="banner" id="home">
       <Container>
         <Row className="aligh-items-center">
-          <Col xs={12} md={6} xl={7}>
-            <TrackVisibility>
-              {({ isVisible }) => (
-                <div
-                  className={
-                    isVisible ? "animate__animated animate__fadeIn" : ""
-                  }
-                >
-                                   
-                  
-                  <button onClick={onMint}>
-                    Mint NFT! <ArrowRightCircle size={30} />
-                  </button>
-                  
-                  <button onClick={OwnerOfcall}>
-                    Check the remaining usage
-                    <ArrowRightCircle size={30} />
-                  </button>
-                  <button onClick={onVerify}>
-                    Verify NFT Ticket <ArrowRightCircle size={30} />
-                  </button>
-                  <button onClick={tokenURICall}>
-                    View NFT Ticket
-                    <ArrowRightCircle size={30} />
-                  </button>
-                </div>
-              )}
-            </TrackVisibility>
-          </Col>
-          <Col xs={12} md={6} xl={5}>
+        <Col xs={12} md={6} xl={5}>
             <TrackVisibility>
               {({ isVisible }) => (
                 <div className="App">
@@ -281,13 +269,14 @@ export const Banner = () => {
                   onResult={(result, error) => {
                     if (!!result) {
                       setData(result?.text);
+                      QRdata_verify(result?.text);
                     }
 
                     if (!!error) {
                       console.info(error);
                     }
                   }}
-                  scanDelay={100}
+                  scanDelay={200}
                   style={{ width: '100%' }}
                 />
                 
@@ -296,13 +285,39 @@ export const Banner = () => {
               )}
             </TrackVisibility>
           </Col>
+          <Col xs={12} md={6} xl={7}>
+            <TrackVisibility>
+              {({ isVisible }) => (
+                <div
+                  className={
+                    isVisible ? "animate__animated animate__fadeIn" : ""
+                  }
+                >
+                  <button onClick={tokenURICall}>
+                    View NFT Ticket
+                    <ArrowRightCircle size={30} />
+                  </button>                 
+                  <button onClick={onMint}>
+                    Mint NFT! <ArrowRightCircle size={30} />
+                  </button>
+                </div>
+              )}
+            </TrackVisibility>
+          </Col>
+          
         </Row>
       </Container>
     </section>
   );
 }
 
-
+/* <button onClick={OwnerOfcall}>
+  Check the remaining usage
+  <ArrowRightCircle size={30} />
+  </button>
+  <button onClick={onVerify}>
+    Verify NFT Ticket <ArrowRightCircle size={30} />
+</button> */
 // <button onClick={email_send}>Send email</button> //276
 // <div style={styles.inputWrapper}>
 // <input value={url} onChange={onUrlChange} style={styles.inputBox} />
