@@ -5,7 +5,7 @@ import contractABI from "./abi.json";
 const web3 = createAlchemyWeb3(
   "https://polygon-mumbai.g.alchemy.com/v2/aC1N39LhBDnTkyZj40eYjhX5-9c73u_n"
 );
-const contractAddress = "0x82Cf04AcD7C16Eeaab5b859D0AB5F219D982d630";
+const contractAddress = "0xae6641D4D292A92Ba4C595ED473964f8750b447B";
 
 //0x85bbf85E11f2f3089358EFe9E5258ce6e9B1c2fF
 //call tokenURI 
@@ -54,8 +54,8 @@ export const nftused = async(tokenId)=>{
     const used = await window.contract.methods
       .nftused(tokenId)
       .call({ from: window.ethereum.selectedAddress });
-      console.log(tokenId+"     "+used);
-    if(used == 1){
+      console.log(tokenId+":"+used);
+    if(used === true){
       return {
         success: true,
         status: "✅ NFT Ticket 可使用",

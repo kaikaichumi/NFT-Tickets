@@ -254,13 +254,11 @@ export const Banner = () => {
     <section className="banner" id="home">
       <Container>
         <Row className="aligh-items-center">
-        <Col xs={12} md={6} xl={5}>
+        <Col xs={12} md={6} xl={7}>
             <TrackVisibility>
-              {({ isVisible }) => (
+              
                 <div className="App">
                 <div>
-                                
-                  
                 </div>
                 <div ref={ref} />
                 <>
@@ -282,7 +280,7 @@ export const Banner = () => {
                 
               </>
                 </div>
-              )}
+              
             </TrackVisibility>
           </Col>
           <Col xs={12} md={6} xl={7}>

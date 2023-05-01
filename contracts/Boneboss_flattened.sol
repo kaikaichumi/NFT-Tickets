@@ -1710,7 +1710,7 @@ contract nfticket is ERC721, ReentrancyGuard, Ownable {
     mintCountMap[minter] += count;
   }
 
-  /** MINTING **/
+  /** MINTING SETTING**/
 
   uint256 public constant MAX_SUPPLY = 100;
 
@@ -1764,7 +1764,7 @@ contract nfticket is ERC721, ReentrancyGuard, Ownable {
   string private customBaseURI;
 
   mapping(uint256 => string) private tokenURIMap;//set (tokenId=>ipfs://pic)
-  mapping(uint256 => uint256) private tokencountMap;//set (tokenId=>1)
+  mapping(uint256 => bool) private tokencountMap;//set (tokenId=>true)
 
   function setTokenURI(string memory tokenURI_)
     external
@@ -1772,7 +1772,7 @@ contract nfticket is ERC721, ReentrancyGuard, Ownable {
   {
       for (uint256 i=0; i<MAX_SUPPLY;i++){
         tokenURIMap[i] = tokenURI_;
-        tokencountMap[i]=1;
+        tokencountMap[i]=true;
       }
   }
 
@@ -1828,21 +1828,17 @@ contract nfticket is ERC721, ReentrancyGuard, Ownable {
 
   function tokenVerify(uint256 tokenId)
     external onlyOwner 
-    returns(bool)
       {
         if(msg.sender == ownerOf(tokenId)){
-          if(tokencountMap[tokenId]==1){
-            tokencountMap[tokenId]=0;
-            return true;
+          if(tokencountMap[tokenId]==true){
+            tokencountMap[tokenId]=false;
+            
           }
         }
-        return false;
         
       }
   
-  function nftused(uint256 tokenId) public view returns(uint256){
+  function nftused(uint256 tokenId) public view returns(bool){
     return  tokencountMap[tokenId];
   }
 }
-
-//The code writed by JakeHong.
