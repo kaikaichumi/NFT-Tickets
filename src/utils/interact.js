@@ -124,14 +124,13 @@ export const verifyNFT = async(tokenId)=>{
             success: false,
             status:
               "😥 Something went wrong: " +
-              err.message +
-              "Please input tokenId in a textbox.",
+              err.message
           };
         }
       } else {
         return {
           success: false,
-          status: "Your wallet havn't contain this tokenId.",
+          status: "OnlyOwner",
         };
       }
   }catch(err){

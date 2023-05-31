@@ -56,16 +56,16 @@ export const Banner = () => {
     });
   }, [url]);
   //qrcode url setting
-  const onUrlChange = (event) => {
-    setUrl(event);
-  };
+  // const onUrlChange = (event) => {
+  //   setUrl(event);
+  // };
 
-  const onDownloadClick = () => {
-    onUrlChange(totalSupplyOfcall());
-    qrCode.download({
-      extension: fileExt
-    });
-  };  
+  // const onDownloadClick = () => {
+  //   onUrlChange(totalSupplyOfcall());
+  //   qrCode.download({
+  //     extension: fileExt
+  //   });
+  // };  
   //qrcode
    
   //email
@@ -116,9 +116,7 @@ export const Banner = () => {
       if (await OwnerOfcall(data) == true){
         onVerify(data);
       };
-      
     }
-
   }
   
   
@@ -204,7 +202,10 @@ export const Banner = () => {
       console.log(status);
       console.log(success);
       console.log(success.toString());
-      alert(status);
+      const baseuri = await tokenURICall(data);
+      fetch(baseuri)
+        .then((response) => response.json())
+        .then((json) => alert(status+"\n"+json.image));
       return success;
     }
     
@@ -219,8 +220,8 @@ export const Banner = () => {
   
 
   //tokenURI
-  const tokenURICall = async()=>{
-    tokenId = inputRef.current.value;
+  const tokenURICall = async(data)=>{
+    tokenId = data;
     if (tokenId < 0 || tokenId > 100) {
       console.log("Please input tokenId for the range 0~99.");
       alert("Please input tokenId for the range 0~99.");
@@ -228,23 +229,12 @@ export const Banner = () => {
       const { status } = await tokenURI(tokenId);
       //console.log(status);
       //alert(status);
-      
-    fetch(status)
-      .then((response) => response.json())
-      .then((json) => alert(json.image));
+    return status;
     }
   }
 
     
-  const styles = {
-    inputWrapper: {
-      margin: "100px 0",
-      display: "flex",
-      justifyContent: "space-between",
-      width: "100%"
-    },
-    
-  };
+  
   
 
 
@@ -257,11 +247,7 @@ export const Banner = () => {
         <Col xs={12} md={6} xl={7}>
             <TrackVisibility>
               
-                <div className="App">
-                <div>
-                </div>
-                <div ref={ref} />
-                <>
+            
                 <h4>TokenId: {data}</h4>
                 <QrReader
                   onResult={(result, error) => {
@@ -278,8 +264,8 @@ export const Banner = () => {
                   style={{ width: '100%' }}
                 />
                 
-              </>
-                </div>
+              
+                
               
             </TrackVisibility>
           </Col>
@@ -309,15 +295,3 @@ export const Banner = () => {
   );
 }
 
-/* <button onClick={OwnerOfcall}>
-  Check the remaining usage
-  <ArrowRightCircle size={30} />
-  </button>
-  <button onClick={onVerify}>
-    Verify NFT Ticket <ArrowRightCircle size={30} />
-</button> */
-// <button onClick={email_send}>Send email</button> //276
-// <div style={styles.inputWrapper}>
-// <input value={url} onChange={onUrlChange} style={styles.inputBox} />
-// <button onClick={onDownloadClick}>Download</button>
-// </div>
