@@ -171,7 +171,7 @@ export const Banner = () => {
   };
 
   //verify nft 
-  const inputRef = useRef(null);
+  
   var tokenId = "";
   
   const onVerify = async (data) => {
@@ -233,9 +233,9 @@ export const Banner = () => {
     }
   }
 
-    
-  
-  
+
+
+
 
 
 
@@ -276,13 +276,9 @@ export const Banner = () => {
                   className={
                     isVisible ? "animate__animated animate__fadeIn" : ""
                   }
-                >
-                  <button onClick={tokenURICall}>
-                    View NFT Ticket
-                    <ArrowRightCircle size={30} />
-                  </button>                 
+                >             
                   <button onClick={onMint}>
-                    Mint NFT! <ArrowRightCircle size={30} />
+                    購買NFT門票! <ArrowRightCircle size={30} />
                   </button>
                 </div>
               )}
