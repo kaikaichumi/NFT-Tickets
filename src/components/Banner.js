@@ -38,23 +38,23 @@ export const Banner = () => {
   const period = 2000;
 
   //qrcode
-  const [url, setUrl] = useState("");
-  const [fileExt] = useState("png");
-  const ref = useRef(null);
-
+  // const [url, setUrl] = useState("");
+  // const [fileExt] = useState("png");
+  // const ref = useRef(null);
+  const [ticketurl, seturl] = useState("");
   const serviceID = 'service_ht3538';
   const templateID = 'template_3j0swxb';
   const public_key = 'hHDC_0ICfYvN290Ae';
 
-  useEffect(() => {
-    qrCode.append(ref.current);
-  }, []);
+  // useEffect(() => {
+  //   qrCode.append(ref.current);
+  // }, []);
 
-  useEffect(() => {
-    qrCode.update({
-      data: url
-    });
-  }, [url]);
+  // useEffect(() => {
+  //   qrCode.update({
+  //     data: url
+  //   });
+  // }, [url]);
   //qrcode url setting
   // const onUrlChange = (event) => {
   //   setUrl(event);
@@ -145,14 +145,14 @@ export const Banner = () => {
 
 
   //mintNFT
-  const [count, setcount] = useState(1);
-  const onMint = async () => {
-    setcount(1);
-    console.log(count);
-    const { status } = await mintNFT(count);
-    console.log(status);
-    alert(status);
-  };
+  // const [count, setcount] = useState(1);
+  // const onMint = async () => {
+  //   setcount(1);
+  //   console.log(count);
+  //   const { status } = await mintNFT(count);
+  //   console.log(status);
+  //   alert(status);
+  // };
 
   //verify nft 
   
@@ -171,7 +171,7 @@ export const Banner = () => {
       alert(status);
     }
   };
-
+  
   //nftused return(uint256)
   const OwnerOfcall = async(data)=>{
     tokenId = data;
@@ -187,10 +187,11 @@ export const Banner = () => {
       console.log(success);
       console.log(success.toString());
       const baseuri = await tokenURICall(data);
-      // fetch(baseuri)
-      //   .then((response) => response.json())
-      //   .then((json) => alert(status+"   門票網址："+json.image));
-      alert(status+"   門票網址：https://sapphire-subsequent-pelican-620.mypinata.cloud/ipfs/QmTaGeVoQ6juoukCPfj87vteCqXGijXoa3aEzTcsW1y3kp/00.png");
+      alert(status);
+      fetch(baseuri)
+        .then((response) => response.json())
+        .then((json) => seturl(json.image));
+      //alert(status+"   門票網址：https://sapphire-subsequent-pelican-620.mypinata.cloud/ipfs/QmTaGeVoQ6juoukCPfj87vteCqXGijXoa3aEzTcsW1y3kp/00.png");
       return success;
     }
     
@@ -222,7 +223,10 @@ export const Banner = () => {
     return status;
     }
   }
+  
   const ticketURL = () => {
+    //const url = ticketurl;
+    //console.log(url);
     const url = "https://sapphire-subsequent-pelican-620.mypinata.cloud/ipfs/QmTaGeVoQ6juoukCPfj87vteCqXGijXoa3aEzTcsW1y3kp/00.png";
     var newTab = window.open(url, '_blank');
     // eslint-disable-next-line no-unused-expressions
