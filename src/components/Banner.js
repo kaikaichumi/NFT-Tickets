@@ -187,9 +187,10 @@ export const Banner = () => {
       console.log(success);
       console.log(success.toString());
       const baseuri = await tokenURICall(data);
-      fetch(baseuri)
-        .then((response) => response.json())
-        .then((json) => alert(status+"\n"+json.image));
+      // fetch(baseuri)
+      //   .then((response) => response.json())
+      //   .then((json) => alert(status+"   門票網址："+json.image));
+      alert(status+"   門票網址：https://sapphire-subsequent-pelican-620.mypinata.cloud/ipfs/QmTaGeVoQ6juoukCPfj87vteCqXGijXoa3aEzTcsW1y3kp/00.png");
       return success;
     }
     
@@ -205,14 +206,19 @@ export const Banner = () => {
 
   //tokenURI
   const tokenURICall = async(data)=>{
+    
     tokenId = data;
+    console.log(tokenId);
     if (tokenId < 0 || tokenId > 100) {
       console.log("Please input tokenId for the range 0~99.");
       alert("Please input tokenId for the range 0~99.");
     } else {
       const { status } = await tokenURI(tokenId);
-      //console.log(status);
-      //alert(status);
+      console.log(status);
+      //alert("https://sapphire-subsequent-pelican-620.mypinata.cloud/ipfs/QmTaGeVoQ6juoukCPfj87vteCqXGijXoa3aEzTcsW1y3kp/00.png");
+      // fetch(status)
+      //   .then((response) => response.json())
+      //   .then((json) => alert(json.image));
     return status;
     }
   }
@@ -229,8 +235,8 @@ export const Banner = () => {
       <Container>
         <Row className="aligh-items-center">
         <Col xs={12} md={6} xl={7}>
-            <TrackVisibility>
-              
+            {/* <TrackVisibility> */}
+              <div>
             
                 <h4>TokenId: {data}</h4>
                 <QrReader
@@ -247,29 +253,33 @@ export const Banner = () => {
                   scanDelay={200}
                   style={{ width: '100%' }}
                 />
-                
+              </div>
               
                 
               
-            </TrackVisibility>
+            {/* </TrackVisibility> */}
           </Col>
           <Col xs={12} md={6} xl={7}>
-            <TrackVisibility>
-              {({ isVisible }) => (
+            {/* <TrackVisibility> */}
+              {/* {({ isvisible }) => ( */}
                 <div
-                  className={
-                    isVisible ? "animate__animated animate__fadeIn" : ""
-                  }
+                  // className={
+                  //   isvisible ? "animate__animated animate__fadeIn" : ""
+                  // }
                 >             
                   <button onClick={onMint}>
                     購買NFT門票! <ArrowRightCircle size={30} />
                   </button>
-                  {/* <button onClick={email_send}>
-                    send email  <ArrowRightCircle size={30} />
-                  </button> */}
+                  
                 </div>
-              )}
-            </TrackVisibility>
+                {/* <div>
+                  <button onClick={tokenURICall}>
+                    send email  <ArrowRightCircle size={30} />
+                  </button>
+                </div> */}
+                
+              {/* )} */}
+            {/* </TrackVisibility> */}
           </Col>
           
         </Row>
