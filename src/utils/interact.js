@@ -221,8 +221,7 @@ export const totalSupply = async()=>{
       .call({ from: window.ethereum.selectedAddress });
       return {
         success: true,
-        status:
-          used,
+        status: used,
       };
       
     

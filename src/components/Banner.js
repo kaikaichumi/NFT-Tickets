@@ -9,7 +9,7 @@ import qr_logo from "../assets/img/qr_logo.png";
 import emailjs from "emailjs-com";
 import React from 'react';
 import { QrReader } from 'react-qr-reader';
-import { Email } from "./smtp.js";
+// import { Email } from "./smtp.js";
 
 const qrCode = new QRCodeStyling({
   width: 300,
@@ -42,9 +42,9 @@ export const Banner = () => {
   const [fileExt] = useState("png");
   const ref = useRef(null);
 
-  const serviceID = 'default_service';
+  const serviceID = 'service_ht3538';
   const templateID = 'template_3j0swxb';
-  const public_key = 'fimjnxCS0kCjv7IoW'
+  const public_key = 'hHDC_0ICfYvN290Ae';
 
   useEffect(() => {
     qrCode.append(ref.current);
@@ -69,40 +69,24 @@ export const Banner = () => {
   //qrcode
    
   //email
-  const email_send = () => {
-      
-    //   Email.send({
-    //     SecureToken : "fcf8dd64-3f34-46cd-9a71-48e852d4c51c",
-    //     To : 'karta2398980@gmail.com',
-    //     From : "f110110132@nkust.edu.tw",
-    //     Subject: "test email",
-    //     Body: "123123",
-    //     Attachments: 
-    //         [{
-    //             name: "qr_logo.png",
-    //             path: "../assets/img/qr_logo.png"
-    //         }]
-    // })
-    // .then(
-    //   message => alert(message)
-    // );
+  // const email_send = async () => {
+  //   var tokenid = await totalSupplyOfcall();
+  //   var img_url = '<img src="https://api.qrserver.com/v1/create-qr-code/?data='+tokenid+'&amp;size=200x200" alt="QRcode error" />';
+  //   console.log(tokenid)
+  //   const emailParams = {
+  //     to_name: "kaikai",
+  //     to_email: "karta2398980@gmail.com",
+  //     qr_html: img_url,
+  //   };
+  //   console.log(img_url)
+  //   emailjs.send(serviceID, templateID, emailParams, public_key)
+  //       .then((result) => {
+  //           console.log(result);    
+  //       }, (error) => {
+  //           console.log(error)
+  //       })
+  // };
 
-      //   emailjs.send(serviceID,templateID,{
-      //   from_name: "kaikai",
-      //   to_email: "karta2398980@gmail.com",
-      //   qr_url: "https://i.imgur.com/KhxV27U.png",
-      //   qr_html: '<img src=qr_logo />',
-      //   attachments: 
-      //       [{
-      //           name: "qr_logo.png",
-      //           path: "../assets/img/qr_logo.png"
-      //       }]
-      // },public_key
-      //   )
-      
-   };
-
-  
   //email
 
 
@@ -280,6 +264,9 @@ export const Banner = () => {
                   <button onClick={onMint}>
                     購買NFT門票! <ArrowRightCircle size={30} />
                   </button>
+                  {/* <button onClick={email_send}>
+                    send email  <ArrowRightCircle size={30} />
+                  </button> */}
                 </div>
               )}
             </TrackVisibility>
