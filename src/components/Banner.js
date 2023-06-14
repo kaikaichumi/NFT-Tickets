@@ -222,6 +222,12 @@ export const Banner = () => {
     return status;
     }
   }
+  const ticketURL = () => {
+    const url = "https://sapphire-subsequent-pelican-620.mypinata.cloud/ipfs/QmTaGeVoQ6juoukCPfj87vteCqXGijXoa3aEzTcsW1y3kp/00.png";
+    var newTab = window.open(url, '_blank');
+    // eslint-disable-next-line no-unused-expressions
+    newTab.location;
+  }
 
 
 
@@ -235,7 +241,7 @@ export const Banner = () => {
       <Container>
         <Row className="aligh-items-center">
         <Col xs={12} md={6} xl={7}>
-            {/* <TrackVisibility> */}
+            
               <div>
             
                 <h4>TokenId: {data}</h4>
@@ -254,34 +260,25 @@ export const Banner = () => {
                   style={{ width: '100%' }}
                 />
               </div>
-              
-                
-              
-            {/* </TrackVisibility> */}
+
           </Col>
           <Col xs={12} md={6} xl={7}>
-            {/* <TrackVisibility> */}
-              {/* {({ isvisible }) => ( */}
-                <div
-                  // className={
-                  //   isvisible ? "animate__animated animate__fadeIn" : ""
-                  // }
-                >             
+            
+                {/* <div>             
                   <button onClick={onMint}>
                     購買NFT門票! <ArrowRightCircle size={30} />
                   </button>
                   
-                </div>
-                {/* <div>
-                  <button onClick={tokenURICall}>
-                    send email  <ArrowRightCircle size={30} />
-                  </button>
                 </div> */}
+                <div>
+                  <button onClick={ticketURL}>
+                    查看門票  <ArrowRightCircle size={30} />
+                  </button>
+                </div>
                 
-              {/* )} */}
-            {/* </TrackVisibility> */}
+              
           </Col>
-          
+                
         </Row>
       </Container>
     </section>
