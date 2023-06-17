@@ -88,7 +88,7 @@ const NavBar = ({ signOut }) => {
       <Navbar expand="md" className={scrolled ? "scrolled" : ""}>
         <Container>
           <Navbar.Brand href="/">
-            <Nav className="LOGO">NFT ticket test</Nav>
+            <Nav className="LOGO">NFT tickets test</Nav>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav">
             <span className="navbar-toggler-icon"></span>
@@ -118,17 +118,9 @@ const NavBar = ({ signOut }) => {
                 >
                   <img src={navIcon5} alt="" />
                 </a>
+                               
                 <a
-                  href="mailto:F110110132@nkust.edu.tw"
-                  target="_blank"
-                  title="Email"
-                  rel="noreferrer"
-                >
-                  <img src={navIcon2} alt="" />
-                </a>
-                
-                <a
-                  href="https://github.com/kaikaichumi/NFTicket_test/"
+                  href="https://github.com/kaikaichumi/NFT-Tickets"
                   target="_blank"
                   title="GitHub"
                   rel="noreferrer"
