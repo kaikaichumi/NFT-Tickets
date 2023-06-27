@@ -166,9 +166,12 @@ export const Banner = () => {
       console.log("Please input tokenId for the range 0~99.");
       alert("Please input tokenId for the range 0~99.");
     } else {
-      const { status } = await verifyNFT(tokenId);
+      const { success, status } = await verifyNFT(tokenId);
       console.log(status);
-      alert(status);
+      if(success === true) {
+        alert(status);
+      }
+      
     }
   };
   
@@ -186,11 +189,11 @@ export const Banner = () => {
       console.log(status);
       console.log(success);
       console.log(success.toString());
-      const baseuri = await tokenURICall(data);
       alert(status);
-      fetch(baseuri)
-        .then((response) => response.json())
-        .then((json) => seturl(json.image));
+      const baseuri = await tokenURICall(data);
+      // fetch(baseuri)
+      //   .then((response) => response.json())
+      //   .then((json) => seturl(json.image));
       //alert(status+"   門票網址：https://sapphire-subsequent-pelican-620.mypinata.cloud/ipfs/QmTaGeVoQ6juoukCPfj87vteCqXGijXoa3aEzTcsW1y3kp/00.png");
       return success;
     }
@@ -217,18 +220,22 @@ export const Banner = () => {
       const { status } = await tokenURI(tokenId);
       console.log(status);
       //alert("https://sapphire-subsequent-pelican-620.mypinata.cloud/ipfs/QmTaGeVoQ6juoukCPfj87vteCqXGijXoa3aEzTcsW1y3kp/00.png");
-      // fetch(status)
-      //   .then((response) => response.json())
-      //   .then((json) => alert(json.image));
+      fetch(status)
+        .then((response) => response.json())
+        .then((json) => seturl(json.image));
     return status;
     }
   }
   
-  const ticketURL = () => {
+  const ticketURL = async() => {
     //const url = ticketurl;
     //console.log(url);
-    const url = "https://sapphire-subsequent-pelican-620.mypinata.cloud/ipfs/QmTaGeVoQ6juoukCPfj87vteCqXGijXoa3aEzTcsW1y3kp/00.png";
-    var newTab = window.open(url, '_blank');
+    // const baseuri = await tokenURICall(data);
+    //   fetch(baseuri)
+    //     .then((response) => response.json())
+    //     .then((json) => seturl(json.image));
+    //const url = "https://sapphire-subsequent-pelican-620.mypinata.cloud/ipfs/QmTaGeVoQ6juoukCPfj87vteCqXGijXoa3aEzTcsW1y3kp/00.png";
+    var newTab = window.open(ticketurl, '_blank');
     // eslint-disable-next-line no-unused-expressions
     newTab.location;
   }
