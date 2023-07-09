@@ -64,7 +64,7 @@ contract nfticket is ERC721, ReentrancyGuard, Ownable {
 
     require(totalSupply() + count - 1 < MAX_SUPPLY, "Exceeds max supply");
 
-    require(count <= MAX_MULTIMINT, "Mint at most 10 at a time");
+    require(count <= MAX_MULTIMINT, "Mint at most 1 at a time");
 
     require(
       msg.value >= PRICE * count, "Insufficient payment, 0.02 ETH per item"
@@ -160,13 +160,7 @@ contract nfticket is ERC721, ReentrancyGuard, Ownable {
   function tokenVerify(uint256 tokenId)
     external onlyOwner 
       {
-        if(msg.sender == ownerOf(tokenId)){
-          if(tokencountMap[tokenId]==true){
-            tokencountMap[tokenId]=false;
-            
-          }
-        }
-        
+        tokencountMap[tokenId]=false;
       }
   
   function nftused(uint256 tokenId) public view returns(bool){

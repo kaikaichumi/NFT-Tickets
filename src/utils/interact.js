@@ -5,8 +5,8 @@ import contractABI from "./abi.json";
 const web3 = createAlchemyWeb3(
   "https://polygon-mumbai.g.alchemy.com/v2/aC1N39LhBDnTkyZj40eYjhX5-9c73u_n"
 );
-const contractAddress = "0xae6641D4D292A92Ba4C595ED473964f8750b447B";
-
+const contractAddress = "0x89Dd0BffCa79607c707Af41d7bFFe32c6A8a02Ec";
+const contractOwner = "0x050d48acb632005d46fb043ed3c98bb3f846c819";
 //0x85bbf85E11f2f3089358EFe9E5258ce6e9B1c2fF
 //call tokenURI 
 export const tokenURI = async(tokenId)=>{
@@ -97,10 +97,11 @@ export const verifyNFT = async(tokenId)=>{
     const address = await window.ethereum.request({
       method: "eth_accounts",
     });
-    console.log(ownerOfcall)
+    console.log(ownerOfcall);
     console.log(address[0]);
-      
-      if (ownerOfcall.toLowerCase() === address[0]) { //compare address is match
+    console.log(contractOwner);
+    // if (ownerOfcall.toLowerCase() === address[0]) { //compare address is match
+    
         //set up your Ethereum transaction
         const transactionParameters = {
           from: window.ethereum.selectedAddress, // must match user's active address.
@@ -127,12 +128,7 @@ export const verifyNFT = async(tokenId)=>{
               err.message
           };
         }
-      } else {
-        return {
-          success: false,
-          status: "OnlyOwner",
-        };
-      }
+      
   }catch(err){
     return {
       success: false,

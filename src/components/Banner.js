@@ -10,6 +10,8 @@ import emailjs from "emailjs-com";
 import React from 'react';
 import { QrReader } from 'react-qr-reader';
 // import { Email } from "./smtp.js";
+import AES from 'crypto-js/aes';
+import encUtf8 from 'crypto-js/enc-utf8';
 
 const qrCode = new QRCodeStyling({
   width: 300,
@@ -94,11 +96,18 @@ export const Banner = () => {
   const [data, setData] = useState('No result');
   var QRdata = 'No result';
   //qrcode 驗證
-  const QRdata_verify = async (data) => {
-    if (QRdata != data){//判斷data是否被改變
-      QRdata = data;
-      if (await OwnerOfcall(data) == true){
-        onVerify(data);
+  const QRdata_verify = async (endata) => {
+    if (QRdata != endata){//判斷data是否被改變
+      endata = endata.replaceAll(' ', '+')
+      QRdata = endata;
+      var bytes = AES.decrypt(QRdata, 'kaikai');
+      var Data = bytes.toString(encUtf8);
+      setData(Data);
+      console.log(endata);
+      console.log(bytes);
+      console.log(Data);
+      if (await OwnerOfcall(Data) == true){
+        onVerify(Data);
       };
     }
   }
@@ -259,7 +268,7 @@ export const Banner = () => {
                 <QrReader
                   onResult={(result, error) => {
                     if (!!result) {
-                      setData(result?.text);
+                      
                       QRdata_verify(result?.text);
                     }
 
